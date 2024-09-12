@@ -51,3 +51,37 @@
 .mpris-icon-paused {
     color: $green;
 }
+
+
+.bar-music-playstate {
+    @include element_decel;
+    min-height: 1.77rem;
+    min-width: 1.77rem;
+    border-radius: 10rem;
+    //color: $musicOnLayer2;
+    color: $green;
+}
+
+.bar-music-playstate-txt {
+    transition: 100ms cubic-bezier(0.05, 0.7, 0.1, 1);
+    @include icon-material;
+}
+
+// Color of the actual circle for progress
+.bar-music-circprog {
+    @include fluent_decel_long;
+    min-width: 0.136rem; // line width
+    min-height: 1.636rem;
+    padding: 0rem;
+    //background-color: $musicLayer2;
+    //color: $musicOnLayer2;
+    color: $orange;
+}
+
+.bar-music-playstate-playing {
+    min-height: 1.77rem;
+    min-width: 1.77rem;
+    border-radius: 10rem;
+    //color: $musicOnLayer2;
+    color: $yellow;
+}

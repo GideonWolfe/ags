@@ -16,15 +16,16 @@ export default () => {
         children: [Overlay({
             child: Box({
                 vpack: 'center',
-                //className: 'bar-music-playstate',
+                className: 'bar-music-playstate',
                 homogeneous: true,
                 children: [Label({
                     vpack: 'center',
-                    //className: 'bar-music-playstate-txt',
+                    className: 'bar-music-playstate-txt',
                     justification: 'center',
                     setup: (self) => self.hook(Mpris, label => {
                         const mpris = Mpris.getPlayer('');
-                        label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? 'pause' : 'play_arrow'}`;
+                        //label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? 'pause' : 'play_arrow'}`;
+                        label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? '' : ''}`;
                     }),
                 })],
                 setup: (self) => self.hook(Mpris, label => {
@@ -58,7 +59,7 @@ export default () => {
                         label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? '' : ''}`;
                         // Change class to update icon color
                         self.class_name = "mpris-icon-" + `${mpris?.play_back_status}`.toLowerCase();
-                        print(mpris?.name)
+                        //print(mpris?.name)
                     }),
                 })],
                 // setup: (self) => self.hook(Mpris, label => {
@@ -109,6 +110,5 @@ export default () => {
     })
 
     return outerMusicBox
-
 
 }
