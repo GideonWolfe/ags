@@ -1,0 +1,44 @@
+@import './colors';
+
+.volume-volumebutton-icon-overamplified {
+    color: $red;
+}
+
+.volume-volumebutton-icon-high {
+    color: $orange;
+}
+
+.volume-volumebutton-icon-medium {
+    color: $green;
+}
+
+.volume-volumebutton-icon-low {
+    color: $blue;
+}
+
+.volume-volumebutton-icon-muted {
+    color: $red;
+}
+
+// button where volume icon lives
+.volume-volumebutton {
+    background-color: $bg;
+}
+
+.volume-slider {
+
+    // bar after slider position
+    trough {
+        background-color: $green;
+    }
+
+    // bar before slider position
+    highlight {
+        background-color: $blue;
+    }
+
+    // slider circle itself
+    slider {
+        background-color: $magenta;
+    }
+}
