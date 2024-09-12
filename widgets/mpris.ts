@@ -5,11 +5,44 @@ const { Box, Button, EventBox, Label, Overlay, Revealer, Scrollable } = Widget;
 
 const { execAsync, exec } = Utils;
 
+import { TrackProgress } from "./track_progress.ts";
+
+// What is exported by the MPRIS widget
 export default () => {
+
+    // Playing state of media (play/pause symbol in progress circle)
+    const playingState = Box({ // Wrap a box cuz overlay can't have margins itself
+        homogeneous: true,
+        children: [Overlay({
+            child: Box({
+                vpack: 'center',
+                //className: 'bar-music-playstate',
+                homogeneous: true,
+                children: [Label({
+                    vpack: 'center',
+                    //className: 'bar-music-playstate-txt',
+                    justification: 'center',
+                    setup: (self) => self.hook(Mpris, label => {
+                        const mpris = Mpris.getPlayer('');
+                        label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? 'pause' : 'play_arrow'}`;
+                    }),
+                })],
+                setup: (self) => self.hook(Mpris, label => {
+                    const mpris = Mpris.getPlayer('');
+                    if (!mpris) return;
+                    label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris?.play_back_status == 'Playing');
+                    label.toggleClassName('bar-music-playstate', mpris !== null || mpris?.play_back_status == 'Paused');
+                }),
+            }),
+            overlays: [
+                TrackProgress(),
+            ]
+        })]
+    });
 
 
     // State of media
-    const playingState = Box({ // Wrap a box cuz overlay can't have margins itself
+    const oldplayingState = Box({ // Wrap a box cuz overlay can't have margins itself
         homogeneous: true,
         children: [Overlay({
             child: Box({
@@ -25,6 +58,7 @@ export default () => {
                         label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? '' : ''}`;
                         // Change class to update icon color
                         self.class_name = "mpris-icon-" + `${mpris?.play_back_status}`.toLowerCase();
+                        print(mpris?.name)
                     }),
                 })],
                 // setup: (self) => self.hook(Mpris, label => {
