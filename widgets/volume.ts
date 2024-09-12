@@ -46,9 +46,16 @@ export default () => {
             })?.[1]
 
             // Set the icon name based on current volume level
-            self.icon = `audio-volume-${currentLevel}-symbolic`;
             self.tooltip_text = `Volume ${Math.floor(vol)}%`;
-            self.class_name = `volume-volumebutton-icon-${currentLevel}`;
+            if (audio.speaker.is_muted) {
+                self.class_name = 'volume-volumebutton-icon-muted';
+                self.icon = `audio-volume-muted-symbolic`;
+            }
+            else {
+                self.icon = `audio-volume-${currentLevel}-symbolic`;
+                self.class_name = `volume-volumebutton-icon-${currentLevel}`;
+            }
+
 
         }),
     })
