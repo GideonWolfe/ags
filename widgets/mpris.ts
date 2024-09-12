@@ -40,6 +40,7 @@ export default () => {
         })]
     });
 
+    // BUG: not changing title when player changes, but clicks control new player
     // Variable for current track info
     const trackTitle = Label({
         hexpand: true,
@@ -49,7 +50,7 @@ export default () => {
         setup: (self) => self.hook(Mpris, label => {
             const mpris = Mpris.getPlayer('');
             if (mpris)
-                label.label = `${mpris.trackTitle} • ${mpris.trackArtists.join(', ')}`;
+                label.label = `${mpris.track_title} • ${mpris.track_artists.join(', ')}`;
             else
                 label.label = 'No media';
         }),
