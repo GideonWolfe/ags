@@ -22,16 +22,17 @@ export default () => {
                     justification: 'center',
                     setup: (self) => self.hook(Mpris, label => {
                         const mpris = Mpris.getPlayer('');
-                        //label.label = `${mpris !== null && mpris.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
-                        label.label = `${mpris !== null && mpris.playBackStatus == 'Playing' ? ' ' : ' '}`;
+                        label.label = `${mpris !== null && mpris.play_back_status == 'Playing' ? '' : ''}`;
+                        // Change class to update icon color
+                        self.class_name = "mpris-icon-" + `${mpris?.play_back_status}`.toLowerCase();
                     }),
                 })],
-                setup: (self) => self.hook(Mpris, label => {
-                    const mpris = Mpris.getPlayer('');
-                    if (!mpris) return;
-                    label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.playBackStatus == 'Playing');
-                    label.toggleClassName('bar-music-playstate', mpris !== null || mpris.playBackStatus == 'Paused');
-                }),
+                // setup: (self) => self.hook(Mpris, label => {
+                //     const mpris = Mpris.getPlayer('');
+                //     if (!mpris) return;
+                //     label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.playBackStatus == 'Playing');
+                //     label.toggleClassName('bar-music-playstate', mpris !== null || mpris.playBackStatus == 'Paused');
+                // }),
             }),
             // overlays: [
             //     TrackProgress(),
